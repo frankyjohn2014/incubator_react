@@ -1,6 +1,6 @@
 import React from 'react';
 import classes from './posts.module.css'
-import Posts from './posts'
+import Posts from '../posts/posts'
 import  {updatePostActionCreator, addPostActionCreator} from '../redux/postsReducer'
 import { connect } from 'react-redux';
 
