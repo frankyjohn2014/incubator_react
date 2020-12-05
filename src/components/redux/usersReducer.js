@@ -1,13 +1,13 @@
 const FOLLOW = 'FOLLOW'
 const UNFOLLOW = 'UNFOLLOW'
 const SET_USERS = 'SET_USERS'
-
+const SET_CURRENT_PAGE = 'SET_CURRENT_PAGE'
+const TOTAL_USERS_COUNT = 'TOTAL_USERS_COUNT'
 let initialState = {
-    users: [
-        // {id:1, followed: true,photoUrl:'https://www.kinonews.ru/insimgs/2019/newsimg/newsimg87089.jpg', name:"Dmitriy!", status:'Python', location:{city:'Minsk',country:'Belarus'}},
-        // {id:2, followed: false,photoUrl:'https://www.kinonews.ru/insimgs/2019/newsimg/newsimg87089.jpg', name:"Vasya!", status:'Ruby', location:{city:'Kiev',country:'Ukraine'}},
-        // {id:3, followed: true,photoUrl:'https://www.kinonews.ru/insimgs/2019/newsimg/newsimg87089.jpg', name:"Sergey!", status:'JavaScript', location:{city:'Moskow',country:'Russia'}},
-    ]
+    users: [],
+    totalUserCount : 21,
+    pageUserCount: 5,
+    activePage: 2
 }
 
 const usersReducers =(state=initialState,action) => {
@@ -36,7 +36,11 @@ const usersReducers =(state=initialState,action) => {
                 })}
             }
         case SET_USERS: {
-            return { ...state, users:[ ...state.users, ...action.users]}}
+            return { ...state, users:[ ...action.users]}}
+        case SET_CURRENT_PAGE: {
+                return { ...state, activePage: action.activePage}}
+        case TOTAL_USERS_COUNT: {
+            return { ...state, totalUserCount: action.totalUserCount}}
         default:
             return state
     }
@@ -53,5 +57,14 @@ export let unfollowAC = (userId) => {
 export let setUsersAC = (users) => {
     return {type:SET_USERS, users}
 }
+
+export let setCurrentPageAC = (activePage) => {
+    return {type:SET_CURRENT_PAGE, activePage}
+}
+
+export let totalUsersCountAC = (totalUserCount) => {
+    return {type:TOTAL_USERS_COUNT, totalUserCount}
+}
+
 
 export default usersReducers;
