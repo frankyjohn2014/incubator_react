@@ -7,7 +7,7 @@ let initialState = {
     users: [],
     totalUserCount : 21,
     pageUserCount: 5,
-    activePage: 2
+    activePage: 1
 }
 
 const usersReducers =(state=initialState,action) => {
@@ -46,23 +46,23 @@ const usersReducers =(state=initialState,action) => {
     }
 } 
 
-export let followAC = (userId) => {
+export let follow = (userId) => {
     return { type : FOLLOW, userId}
 }
 
-export let unfollowAC = (userId) => {
+export let unfollow = (userId) => {
     return {type:UNFOLLOW, userId}
 }
 
-export let setUsersAC = (users) => {
+export let setUsers = (users) => {
     return {type:SET_USERS, users}
 }
 
-export let setCurrentPageAC = (activePage) => {
+export let setCurrentPage = (activePage) => {
     return {type:SET_CURRENT_PAGE, activePage}
 }
 
-export let totalUsersCountAC = (totalUserCount) => {
+export let setTotalUsersCount = (totalUserCount) => {
     return {type:TOTAL_USERS_COUNT, totalUserCount}
 }
 
