@@ -22,6 +22,9 @@ const Navbar = () => {
                 </div>
                 <a href="#contact">Contact</a>
                 <a href="#about">About</a>
+                <div>
+                    <NavLink to="/login" activeClassName={classes.active}>Login</NavLink>
+                </div>
             </div>
 
     )

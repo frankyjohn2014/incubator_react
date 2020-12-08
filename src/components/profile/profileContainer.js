@@ -7,7 +7,6 @@ import { withRouter } from 'react-router-dom'
 
 class ProfileContainer extends React.Component {
     componentDidMount() {
-     debugger
         let UserId = this.props.match.params.userId
         if (!UserId) {
             UserId = 2
