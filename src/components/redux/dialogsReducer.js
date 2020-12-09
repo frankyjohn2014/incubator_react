@@ -26,7 +26,6 @@ const dialogReducer = (state=initialState,action) => {
         key:5
     }
     switch(action.type) {
-
         case UPDATE_POST: {
             return {
                 ...state,

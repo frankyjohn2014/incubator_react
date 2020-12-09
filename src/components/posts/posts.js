@@ -3,7 +3,6 @@ import classes from './posts.module.css'
 import Post from './post/post'
 
 const Posts = (props) => {
-    console.log(props)
     let state = props.posts
     let addPost = () => {
         props.addPost()

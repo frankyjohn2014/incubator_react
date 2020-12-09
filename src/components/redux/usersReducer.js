@@ -1,17 +1,19 @@
 const FOLLOW = 'FOLLOW'
 const UNFOLLOW = 'UNFOLLOW'
 const SET_USERS = 'SET_USERS'
+const SET_CURRENT_PAGE = 'SET_CURRENT_PAGE'
+const TOTAL_USERS_COUNT = 'TOTAL_USERS_COUNT'
+const TOGGLE_IS_FETCHING = 'TOGGLE_IS_FETCHING'
 
 let initialState = {
-    users: [
-        // {id:1, followed: true,photoUrl:'https://www.kinonews.ru/insimgs/2019/newsimg/newsimg87089.jpg', name:"Dmitriy!", status:'Python', location:{city:'Minsk',country:'Belarus'}},
-        // {id:2, followed: false,photoUrl:'https://www.kinonews.ru/insimgs/2019/newsimg/newsimg87089.jpg', name:"Vasya!", status:'Ruby', location:{city:'Kiev',country:'Ukraine'}},
-        // {id:3, followed: true,photoUrl:'https://www.kinonews.ru/insimgs/2019/newsimg/newsimg87089.jpg', name:"Sergey!", status:'JavaScript', location:{city:'Moskow',country:'Russia'}},
-    ]
+    users: [],
+    totalUserCount : 21,
+    pageUserCount: 5,
+    activePage: 1,
+    isFetching: true,
 }
 
 const usersReducers =(state=initialState,action) => {
-
     switch(action.type) {
         case FOLLOW: {
             return {
@@ -36,22 +38,42 @@ const usersReducers =(state=initialState,action) => {
                 })}
             }
         case SET_USERS: {
-            return { ...state, users:[ ...state.users, ...action.users]}}
+            return { ...state, users:[ ...action.users]}}
+        case SET_CURRENT_PAGE: {
+                return { ...state, activePage: action.activePage}}
+        case TOTAL_USERS_COUNT: {
+            return { ...state, totalUserCount: action.totalUserCount}}
+
+        case TOGGLE_IS_FETCHING: {
+            return { ...state, isFetching: action.isFetching}}
         default:
             return state
     }
 } 
 
-export let followAC = (userId) => {
+export let follow = (userId) => {
     return { type : FOLLOW, userId}
 }
 
-export let unfollowAC = (userId) => {
+export let unfollow = (userId) => {
     return {type:UNFOLLOW, userId}
 }
 
-export let setUsersAC = (users) => {
+export let setUsers = (users) => {
     return {type:SET_USERS, users}
 }
+
+export let setCurrentPage = (activePage) => {
+    return {type:SET_CURRENT_PAGE, activePage}
+}
+
+export let setTotalUsersCount = (totalUserCount) => {
+    return {type:TOTAL_USERS_COUNT, totalUserCount}
+}
+
+export let toggleIsFetching = (isFetching) => {
+    return {type:TOGGLE_IS_FETCHING, isFetching}
+}
+
 
 export default usersReducers;
