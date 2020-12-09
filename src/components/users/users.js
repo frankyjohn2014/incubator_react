@@ -27,17 +27,21 @@ let Users = (props) => {
                 </div>
                 <div>
                     {u.followed ?  
-                    <button onClick={() => {
+                    <button disabled={props.followinginProgress} onClick={() => {
                         setUnfollow(u.id).then(response => {
                             if (response.resultCode === 0) {
-                                props.unfollow(u.id)}
+                                props.unfollow(u.id)
+                                props.toggleFollowingProgress(false)
+                            }
                         })}}>Unfollow</button>
                     : 
-                    <button onClick={() => {
+                    <button disabled={props.followinginProgress} onClick={() => {
                         setFollow(u.id).then(response => {
                             console.log(response)
                             if (response.resultCode === 0) {
-                                props.follow(u.id)}
+                                props.follow(u.id)
+                                props.toggleFollowingProgress(true)
+                            }
                         })}}>Follow</button>  }
                 </div>
                 <span>

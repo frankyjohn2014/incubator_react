@@ -1,12 +1,10 @@
 import React from 'react';
-import classes from './users.module.css'
 import Users from './users'
 import { connect } from 'react-redux';
-import { follow, setUsers, unfollow,setCurrentPage,setTotalUsersCount,toggleIsFetching } from '../redux/usersReducer';
-import styles from './users.module.css'
-import * as axios from 'axios'
+import { follow, setUsers, unfollow,setCurrentPage,setTotalUsersCount,toggleIsFetching,toggleFollowingProgress } from '../redux/usersReducer';
 import Spinner from '../common/spinner/spinner';
 import {getUsers} from '../api/api'
+
 class UsersContainers extends React.Component {
     componentDidMount() {
         console.log(this.props)
@@ -37,6 +35,8 @@ class UsersContainers extends React.Component {
             users={this.props.users}
             follow={this.props.follow}
             unfollow={this.props.unfollow}
+            toggleFollowingProgress={this.props.toggleFollowingProgress}
+            followinginProgress={this.props.users.followinginProgress}
             />
         </>
     }
@@ -49,6 +49,7 @@ let mapStateToProps = (state) => {
         pageUserCount: state.pageUserCount,
         activePage: state.activePage,
         isFetching: state.isFetching,
+        followinginProgress: state.followinginProgress,
     }
 }
 
@@ -72,6 +73,6 @@ let mapStateToProps = (state) => {
 //     }
 // }
 
-const UsersContainer = connect(mapStateToProps, {follow,unfollow,setUsers,setCurrentPage,setTotalUsersCount,toggleIsFetching})(UsersContainers)
+const UsersContainer = connect(mapStateToProps, {follow,unfollow,setUsers,setCurrentPage,setTotalUsersCount,toggleIsFetching,toggleFollowingProgress})(UsersContainers)
 
 export default UsersContainer;
