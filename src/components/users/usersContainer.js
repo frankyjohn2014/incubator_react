@@ -7,7 +7,6 @@ import {getUsers} from '../api/api'
 
 class UsersContainers extends React.Component {
     componentDidMount() {
-        console.log(this.props)
         this.props.toggleIsFetching(true)
         getUsers(this.props.users.activePage,this.props.users.pageUserCount).then(response => {
             this.props.toggleIsFetching(false)
