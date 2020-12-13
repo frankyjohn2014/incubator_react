@@ -1,17 +1,11 @@
 import React from 'react'
-import * as axios from 'axios'
 import { connect } from 'react-redux'
 import Auth from './auth'
-import { setAuthData } from './authReducer'
+import { getAuthData } from './authReducer'
 
 class AuthContainer extends React.Component {
     componentDidMount() {
-        axios.get(`https://social-network.samuraijs.com/api/1.0/auth/me`,
-        {withCredentials: true}).then(response => {
-            if (response.data.resultCode === 0) {
-                this.props.setAuthData(response.data)
-            }
-        })
+        this.props.getAuthData()
     }
 
     render() {
@@ -25,4 +19,4 @@ let mapStateToProps = (state) => {
     }
 }
 
-export default connect(mapStateToProps, {setAuthData})(AuthContainer)
+export default connect(mapStateToProps, {getAuthData})(AuthContainer)
