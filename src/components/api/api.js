@@ -3,15 +3,14 @@ import * as axios from 'axios'
 let instance = axios.create({
     withCredentials: true,
     baseURL : 'https://social-network.samuraijs.com/api/1.0',
-    headers: {'API-KEY':'58a4bd53-ca1a-44a2-a8d0-3d3810e31056'}
+    headers: {'API-KEY':'7b14e426-fa0c-47bc-a6f8-9026a4b30723'}
 })
 
-export const getUsers = (activePage,pageUserCount) => {
+export const getUsersApi = (activePage,pageUserCount) => {
     return instance.get(`/users?page=${activePage}&count=${pageUserCount}`).then(response => {
         return response.data
     })
 }
-
 
 export const setUnfollow = (id) => {
     return instance.delete(`/follow/`+ id).then(response => {
@@ -24,4 +23,6 @@ export const setFollow = (id) => {
         return response.data
     })
 }
+
+
 
