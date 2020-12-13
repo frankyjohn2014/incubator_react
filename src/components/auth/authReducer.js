@@ -1,3 +1,5 @@
+import { AuthApi } from "../api/api"
+
 const GET_AUTH = 'GET_AUTH'
 
 let initialState = {
@@ -22,6 +24,16 @@ const authReducer =(state=initialState,action) => {
 
 export let setAuthData = (data) => {
     return {type:GET_AUTH, data}
+}
+
+export const getAuthData = () => {
+    return (dispatch) => {
+        AuthApi.me().then(response => {
+            if (response.data.resultCode === 0) {
+                dispatch(setAuthData(response.data))
+            }
+        })
+    }
 }
 
 export default authReducer;

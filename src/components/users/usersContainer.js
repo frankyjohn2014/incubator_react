@@ -1,7 +1,7 @@
 import React from 'react';
 import Users from './users'
 import { connect } from 'react-redux';
-import { follow, unfollow,setCurrentPage, getUsers} from '../redux/usersReducer';
+import {follow,unfollow,setCurrentPage,getUsers} from '../redux/usersReducer';
 import Spinner from '../common/spinner/spinner';
 
 class UsersContainers extends React.Component {
@@ -38,26 +38,6 @@ let mapStateToProps = (state) => {
         followinginProgress: state.followinginProgress,
     }
 }
-
-// let mapDispatchToProps = (dispatch) => {
-//     return {
-//         follow: (userId) => {
-//             dispatch(followAC(userId))
-//         },
-//         unfollow: (userId) => {
-//             dispatch(unfollowAC(userId))
-//         },
-//         setUsers: (users) => {
-//             dispatch(setUsersAC(users))
-//         },
-//         setCurrentPage:(activePage) => {
-//             dispatch(setCurrentPageAC(activePage))
-//         },
-//         setTotalUsersCount:(totalUserCount) => {
-//             dispatch(totalUsersCountAC(totalUserCount))
-//         }
-//     }
-// }
 
 const UsersContainer = connect(mapStateToProps, {
     follow,unfollow,setCurrentPage,getUsers})(UsersContainers)
