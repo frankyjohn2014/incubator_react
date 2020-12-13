@@ -1,27 +1,15 @@
 import React from 'react';
 import Users from './users'
 import { connect } from 'react-redux';
-import { follow, setUsers, unfollow,setCurrentPage,setTotalUsersCount,toggleIsFetching,toggleFollowingProgress } from '../redux/usersReducer';
+import { follow, unfollow,setCurrentPage, getUsers} from '../redux/usersReducer';
 import Spinner from '../common/spinner/spinner';
-import {getUsers} from '../api/api'
 
 class UsersContainers extends React.Component {
     componentDidMount() {
-        this.props.toggleIsFetching(true)
-        getUsers(this.props.users.activePage,this.props.users.pageUserCount).then(response => {
-            this.props.toggleIsFetching(false)
-            this.props.setUsers(response.items)
-            this.props.setTotalUsersCount(response.totalCount)
-        })
+        this.props.getUsers(this.props.users.activePage, this.props.users.pageUserCount)
     }
     onPageChanged = (pageNumber) => {
-        this.props.toggleIsFetching(true)
-        this.props.setCurrentPage(pageNumber)
-        getUsers(pageNumber,this.props.users.pageUserCount)
-        .then(response => {
-            this.props.toggleIsFetching(false)
-            this.props.setUsers(response.items)
-        })
+        this.props.getUsers(pageNumber,this.props.users.pageUserCount)
     }
     render() {
             return <> 
@@ -34,7 +22,6 @@ class UsersContainers extends React.Component {
             users={this.props.users}
             follow={this.props.follow}
             unfollow={this.props.unfollow}
-            toggleFollowingProgress={this.props.toggleFollowingProgress}
             followinginProgress={this.props.users.followinginProgress}
             />
         </>
@@ -72,6 +59,7 @@ let mapStateToProps = (state) => {
 //     }
 // }
 
-const UsersContainer = connect(mapStateToProps, {follow,unfollow,setUsers,setCurrentPage,setTotalUsersCount,toggleIsFetching,toggleFollowingProgress})(UsersContainers)
+const UsersContainer = connect(mapStateToProps, {
+    follow,unfollow,setCurrentPage,getUsers})(UsersContainers)
 
 export default UsersContainer;
