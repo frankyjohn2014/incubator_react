@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import {follow,unfollow,setCurrentPage,getUsers} from '../redux/usersReducer';
 import Spinner from '../common/spinner/spinner';
 import { compose } from 'redux';
+import { withAuthRedirect } from '../hoc/AuthRedirect';
 
 class UsersContainers extends React.Component {
     componentDidMount() {
@@ -37,10 +38,12 @@ let mapStateToProps = (state) => {
         activePage: state.activePage,
         isFetching: state.isFetching,
         followinginProgress: state.followinginProgress,
+        login: state.login,
     }
 }
 
 export default compose(
     connect(mapStateToProps, {
         follow,unfollow,setCurrentPage,getUsers}),
+        withAuthRedirect,
 )(UsersContainers)
