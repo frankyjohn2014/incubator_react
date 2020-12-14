@@ -4,6 +4,7 @@ import Dialogs from '../dialogs/dialogs';
 import {addPostActionCreatorDialog, updatePostActionCreator} from '../redux/dialogsReducer'
 import { connect } from 'react-redux';
 import { withAuthRedirect } from '../hoc/AuthRedirect';
+import { compose } from 'redux';
 
 
 let mapStateToProps = (state) => {
@@ -25,15 +26,13 @@ let mapDispatchToProps = (dispatch) => {
     }
 }
 
-let AuthRedirectComponent = withAuthRedirect(Dialogs)
-
-
 //HOC
 // let AuthRedirectComponent = (props) => {
 //     if (!props.login.isAuth) return <Redirect to={'/login'}/>
 //     return <Dialogs {...props}/>
 // }
 
-const DialogsContainer = connect(mapStateToProps, mapDispatchToProps)(AuthRedirectComponent)
-
-export default DialogsContainer
+export default compose(
+    connect(mapStateToProps, mapDispatchToProps),
+    withAuthRedirect
+)(Dialogs)

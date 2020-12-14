@@ -3,6 +3,7 @@ import Users from './users'
 import { connect } from 'react-redux';
 import {follow,unfollow,setCurrentPage,getUsers} from '../redux/usersReducer';
 import Spinner from '../common/spinner/spinner';
+import { compose } from 'redux';
 
 class UsersContainers extends React.Component {
     componentDidMount() {
@@ -39,7 +40,7 @@ let mapStateToProps = (state) => {
     }
 }
 
-const UsersContainer = connect(mapStateToProps, {
-    follow,unfollow,setCurrentPage,getUsers})(UsersContainers)
-
-export default UsersContainer;
+export default compose(
+    connect(mapStateToProps, {
+        follow,unfollow,setCurrentPage,getUsers}),
+)(UsersContainers)

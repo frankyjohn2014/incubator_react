@@ -4,6 +4,7 @@ import Posts from './posts'
 import  {updatePostActionCreator, addPostActionCreator} from '../redux/postsReducer'
 import { connect } from 'react-redux';
 import { withAuthRedirect } from '../hoc/AuthRedirect';
+import { compose } from 'redux';
 
 let mapStateToProps = (state) => {
     return {
@@ -22,8 +23,8 @@ let mapDispatchToProps = (dispatch) => {
         },
     }
 }
-let AuthRedirectComponent = withAuthRedirect(Posts)
 
-const PostsContainer = connect(mapStateToProps, mapDispatchToProps)(AuthRedirectComponent)
-
-export default PostsContainer;
+export default compose(
+    connect(mapStateToProps, mapDispatchToProps),
+    withAuthRedirect,
+)(Posts)
