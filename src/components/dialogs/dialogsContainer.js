@@ -3,7 +3,8 @@ import classes from './dialogs.module.css'
 import Dialogs from '../dialogs/dialogs';
 import {addPostActionCreatorDialog, updatePostActionCreator} from '../redux/dialogsReducer'
 import { connect } from 'react-redux';
-import { Redirect } from 'react-router-dom';
+import { withAuthRedirect } from '../hoc/AuthRedirect';
+
 
 let mapStateToProps = (state) => {
     return {
@@ -15,16 +16,24 @@ let mapStateToProps = (state) => {
 
 let mapDispatchToProps = (dispatch) => {
     return {
-        addPost : () => {
+        addPost: () => {
             dispatch(addPostActionCreatorDialog())
         },
-
         changePost: (text) => {
             dispatch(updatePostActionCreator(text))
-        }
+        },
     }
 }
 
-const DialogsContainer = connect(mapStateToProps, mapDispatchToProps)(Dialogs)
+let AuthRedirectComponent = withAuthRedirect(Dialogs)
+
+
+//HOC
+// let AuthRedirectComponent = (props) => {
+//     if (!props.login.isAuth) return <Redirect to={'/login'}/>
+//     return <Dialogs {...props}/>
+// }
+
+const DialogsContainer = connect(mapStateToProps, mapDispatchToProps)(AuthRedirectComponent)
 
 export default DialogsContainer

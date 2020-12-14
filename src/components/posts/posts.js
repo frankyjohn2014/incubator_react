@@ -1,10 +1,10 @@
 import React from 'react';
 import classes from './posts.module.css'
-import Post from './post/post'
-import { Redirect } from 'react-router-dom';
+import Post from './post/post';
 
 const Posts = (props) => {
     let state = props.posts
+
     let addPost = () => {
         props.addPost()
     }
@@ -13,7 +13,6 @@ const Posts = (props) => {
         let body = text.target.value
         props.changePost(body)
     }
-    if (!props.login.isAuth) return <Redirect to={'/login'}/>
 
     const messages = state.message.map((el) => <Post key={el.id} message={el.message}/> )
 
@@ -33,10 +32,8 @@ const Posts = (props) => {
                 <div key={messages.id}>
                     {messages}
                 </div>
-
             </div>
         </div>
-
     )
 }
 
