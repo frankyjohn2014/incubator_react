@@ -2,6 +2,10 @@ import React from 'react';
 import classes from './posts.module.css'
 import Post from './post/post';
 import { Field ,reduxForm} from 'redux-form';
+import { maxLengthCreator, required } from '../validators/validators';
+import { Textarea } from '../common/FormsControls/FormsControls';
+
+const maxLength = maxLengthCreator(10)
 
 const Posts = (props) => {
     let state = props.posts
@@ -15,7 +19,7 @@ const Posts = (props) => {
     return (
         <div className={classes.posts}>
             <div className={classes.input_group}>
-                <LoginReduxForm onSubmit={addNewPost}/>
+                <PostsReduxForm onSubmit={addNewPost} />
             </div>
             {/* <button type="button" className="btn btn-success" onClick={addPost}>Success</button> */}
             <div>
@@ -31,15 +35,15 @@ const Posts = (props) => {
 let PostsForm = (props) => {
     return (
     <form onSubmit={props.handleSubmit}>
-    <div>
-        <Field component={"textarea"} name={"newMessageBody"} placeholder="Enter your message"/>
-    </div>
-    <div>
-        <button>Send</button>
-    </div>
-</form>
+        <div>
+            <Field component={Textarea} name={"newMessageBody"} placeholder="Enter your message" validate={[required, maxLength]}/>
+        </div>
+        <div>
+            <button>Send</button>
+        </div>
+    </form>
 )}
 
-const LoginReduxForm = reduxForm({form: 'postsForm'})(PostsForm)
+const PostsReduxForm = reduxForm({form: 'postsForm'})(PostsForm)
 
 export default Posts;

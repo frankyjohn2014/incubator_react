@@ -1,6 +1,8 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom'
 import { Field,reduxForm } from 'redux-form'
+import { Input } from '../common/FormsControls/FormsControls'
+import { required } from '../validators/validators'
 
 const Auth = (props) => {
     const onSubmit = (formData) => {
@@ -19,13 +21,14 @@ const LoginForm = (props) => {
         <div>
             <form onSubmit={props.handleSubmit}>
                 <div>
-                    <Field placeholder={"Login"} name={"login"} component ={"input"}/>
+                    <Field placeholder={"Login"} name={"login"} component ={Input}
+                    validate={[required]}/>
                 </div>
                 <div>
-                    <Field placeholder={"Password"} name={"password"} component ={"input"}/>
+                    <Field placeholder={"Password"} validate={[required]} name={"password"} component ={Input}/>
                 </div>
                 <div>
-                    <Field type={"checkbox"} name={"rememberMe"} component ={"input"}/> remember me
+                    <Field type={"checkbox"} name={"rememberMe"} component ={Input}/> remember me
                 </div>
                 <div>
                     <button>Login</button>
