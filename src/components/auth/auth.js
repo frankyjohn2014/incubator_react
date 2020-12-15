@@ -14,8 +14,6 @@ const Auth = (props) => {
     )
 }
 
-
-
 const LoginForm = (props) => {
     return (
         <div>

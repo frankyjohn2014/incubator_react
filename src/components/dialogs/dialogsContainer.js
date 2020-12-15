@@ -1,7 +1,7 @@
 import React from 'react'
 import classes from './dialogs.module.css'
 import Dialogs from '../dialogs/dialogs';
-import {addPostActionCreatorDialog, updatePostActionCreator} from '../redux/dialogsReducer'
+import {addPostActionCreatorDialog} from '../redux/dialogsReducer'
 import { connect } from 'react-redux';
 import { withAuthRedirect } from '../hoc/AuthRedirect';
 import { compose } from 'redux';
@@ -17,11 +17,8 @@ let mapStateToProps = (state) => {
 
 let mapDispatchToProps = (dispatch) => {
     return {
-        addPost: () => {
-            dispatch(addPostActionCreatorDialog())
-        },
-        changePost: (text) => {
-            dispatch(updatePostActionCreator(text))
+        addPost: (newMessageBody) => {
+            dispatch(addPostActionCreatorDialog(newMessageBody))
         },
     }
 }

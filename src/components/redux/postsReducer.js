@@ -1,5 +1,4 @@
 const ADD_POST = 'ADD-POST1'
-const UPDATE_POST = 'UPDATE-POST1'
 let initialState = {
     stateInput: '',
     message: [
@@ -13,34 +12,19 @@ let initialState = {
 const postReducers =(state=initialState,action) => {
     switch(action.type) {
         case ADD_POST: {
-            let stateCopy = {...state}
-            stateCopy.message = [...state.message]
-            let newPost = {
-                id: 5,
-                message: state.stateInput,
-                key:5
+            return {
+                ...state,
+                message: [...state.message,{id:4, message: action.newMessageBody}],
             }
-            stateCopy.message.push(newPost)
-            console.log(stateCopy)
-            stateCopy.stateInput = ''
-            return stateCopy
-        }
-        case UPDATE_POST: {
-            let stateCopy = {...state}
-            stateCopy.stateInput = action.newText;
-            return stateCopy
         }
         default:
             return state
     }
 } 
 
-export let addPostActionCreator = () => {
-    return { type : ADD_POST}
+export let addPostActionCreator = (newMessageBody) => {
+    return { type : ADD_POST, newMessageBody}
 }
 
-export let updatePostActionCreator = (text) => {
-    return {type:UPDATE_POST,newText: text}
-}
 
 export default postReducers;
