@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import Auth from './auth'
-import { getAuthData } from './authReducer'
+import { getAuthData,loginReducer, logout } from './authReducer'
 
 class AuthContainer extends React.Component {
     componentDidMount() {
@@ -9,7 +9,7 @@ class AuthContainer extends React.Component {
     }
 
     render() {
-        return <Auth login={this.props.login}/>
+        return <Auth stateLogin={this.props.login} loginReducer={this.props.loginReducer} logout={this.props.logout}/>
     }
 }
 
@@ -19,4 +19,4 @@ let mapStateToProps = (state) => {
     }
 }
 
-export default connect(mapStateToProps, {getAuthData})(AuthContainer)
+export default connect(mapStateToProps, {getAuthData,loginReducer, logout})(AuthContainer)

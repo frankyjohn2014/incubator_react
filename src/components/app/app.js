@@ -8,7 +8,7 @@ import UsersContainer from '../users/usersContainer';
 import ProfileContainer from '../profile/profileContainer';
 import AuthContainer from '../auth/authContainer';
 
-const App = (props) => {
+const App = () => {
     return (
         <BrowserRouter>
             <div>

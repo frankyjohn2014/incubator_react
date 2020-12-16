@@ -5,11 +5,10 @@ import ProfileStatus from './profileStatus'
 
 
 const Profile = (props) => {
-    console.log(props)
     return (
         <div>
             <ProfileStatus status = {props.status} updateStatus={props.updateStatus}/>
-            <ProfileInfo profile={props.profile.profile} />
+            <ProfileInfo profile={props.profile.profile} login={props.login} logoutReducer={props.logoutReducer}/>
         </div>
     )
 }

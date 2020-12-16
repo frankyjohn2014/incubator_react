@@ -2,11 +2,12 @@ import React from 'react';
 import classes from './navbar.module.css'
 import { NavLink } from 'react-router-dom';
 
-const Navbar = () => {
+const Navbar = (props) => {
+    console.log(props)
     return (
             <div className={classes.topnav} id="myTopnav">
                 <div className={classes.item}>
-                    <NavLink to="/"  >Home</NavLink>
+                    <NavLink to="/">Home</NavLink>
                 </div>
                 <div>
                     <NavLink to="/profile/" activeClassName={classes.active}>Profile</NavLink>

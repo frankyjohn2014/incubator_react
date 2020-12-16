@@ -2,6 +2,7 @@ import React from 'react'
 import Spinner from '../common/spinner/spinner'
 
 const ProfileInfo = (props) => {
+    console.log(props)
     let state = {...props.profile}
     if (!props.profile) {
         return <Spinner/>
@@ -20,6 +21,16 @@ const ProfileInfo = (props) => {
                 lookingForAJob : {state.lookingForAJobDescription}
                 </p>
             </div>
+            <div>
+                {!props.login.isAuth ? <text>No log in</text> : 
+                <div>
+                    <text>{props.login.email}</text>
+                    <br/>
+                    <button onClick={props.logoutReducer}> Logout </button>
+                </div>}
+            </div>
+
+
         </div>
     )
 }
