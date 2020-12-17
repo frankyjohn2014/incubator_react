@@ -10,9 +10,11 @@ import { logout } from '../auth/authReducer'
 class ProfileContainer extends React.Component {
     componentDidMount() {
         let UserId = this.props.match.params.userId
-        
         if (!UserId) {
-            UserId = 2
+            UserId = this.props.authoriziedId.id
+            // if(!UserId) {
+            //     this.props.history.push("/login")
+            // }
         }
         this.props.getUserProfile(UserId)
         this.props.getStatus(UserId)
@@ -33,10 +35,12 @@ class ProfileContainer extends React.Component {
 }
 
 let mapStateToProps = (state) => {
+
     return {
         profile: state.profile,
         login: state.login,
-        status: state.profile.status
+        status: state.profile.status,
+        authoriziedId: state.login
     }
 }
 
