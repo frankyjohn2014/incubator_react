@@ -3,7 +3,6 @@ import classes from './navbar.module.css'
 import { NavLink } from 'react-router-dom';
 
 const Navbar = (props) => {
-    console.log(props)
     return (
             <div className={classes.topnav} id="myTopnav">
                 <div className={classes.item}>

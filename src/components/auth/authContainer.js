@@ -9,13 +9,18 @@ class AuthContainer extends React.Component {
     }
 
     render() {
-        return <Auth stateLogin={this.props.login} loginReducer={this.props.loginReducer} logout={this.props.logout}/>
+        return <Auth 
+        stateLogin={this.props.login} 
+        loginReducer={this.props.loginReducer} 
+        logout={this.props.logout} 
+        forms={this.props.form}/>
     }
 }
 
 let mapStateToProps = (state) => {
     return {
-        login: state.login
+        login: state.login,
+        forms: state.form.login
     }
 }
 

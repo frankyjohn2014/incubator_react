@@ -3,8 +3,8 @@ import { NavLink, Redirect } from 'react-router-dom'
 import { Field,reduxForm } from 'redux-form'
 import { Input } from '../common/FormsControls/FormsControls'
 import { required } from '../validators/validators'
-import {login, logout} from './authReducer'
-import { connect } from 'react-redux';
+import styles from '../common/FormsControls/FormsControls.module.css'
+
 
 const Auth = (props) => {
     const onSubmit = (formData) => {
@@ -16,8 +16,8 @@ const Auth = (props) => {
 
     return (
         <div>
-           <h1>LOGIN:</h1> {props.stateLogin.isAuth ? props.stateLogin.email : <NavLink to="/login" >Auth</NavLink>}  
-            <LoginReduxForm onSubmit={onSubmit}/>
+           <h1>LOGIN: </h1> {props.stateLogin.isAuth ? props.stateLogin.email : <NavLink to="/login" >Auth</NavLink>}  
+            <LoginReduxForm onSubmit={onSubmit} forms={props.forms}/>
         </div>
     )
 }
@@ -31,11 +31,14 @@ const LoginForm = (props) => {
                     validate={[required]}/>
                 </div>
                 <div>
-                    <Field placeholder={"Password"} validate={[required]} name={"password"}  component ={Input}/>
+                    <Field placeholder={"Password"} validate={[required]} type={"password"} name={"password"}  component ={Input}/>
                 </div>
                 <div>
                     <Field type={"checkbox"} name={"rememberMe"} component ={Input}/> remember me
                 </div>
+                {props.error && <div className={styles.formSummError}>
+                    {props.error}
+                </div>}
                 <div>
                     <button>Login</button>
                 </div>

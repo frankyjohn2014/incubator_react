@@ -13,3 +13,9 @@
 {
     color: red;
 }
+
+.formSummError {
+    border: red 1px solid;
+    pad: 5px;
+    color: red;
+}
