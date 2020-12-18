@@ -1,9 +1,15 @@
-import  React, {useState} from 'react'
+import  React, {useState, useEffect} from 'react'
 
 const ProfileStatus = (props) => {
     const [editMode, setMode] = useState(false)
     const [status, setStatus] = useState(props.status)
 
+
+    useEffect( () => {
+        setStatus(props.status)
+    }, [props.status])
+
+    
     const activateStatus = () => {
         setMode(true)
         // this.forceUpdate()
@@ -16,6 +22,9 @@ const ProfileStatus = (props) => {
     const changeStatus = (e) => {
         setStatus(e.currentTarget.value)
     }
+
+
+
     return (
         <div>
             {!editMode && 
@@ -25,7 +34,7 @@ const ProfileStatus = (props) => {
         }
         {editMode && 
             <div>
-                <input onChange={changeStatus} autoFocus={true} onBlur={deactivateStatus} />
+                <input onChange={changeStatus} autoFocus={true} onBlur={deactivateStatus} value={status} />
             </div>
         }
         </div>
