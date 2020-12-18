@@ -1,7 +1,6 @@
 import React from 'react'
-import PostsContainer from "../posts/postsContainer"
 import ProfileInfo from './profileInfo'
-import ProfileStatus from './profileStatus'
+import ProfileStatus from './hookprofileStatus'
 
 
 const Profile = (props) => {
