@@ -102,27 +102,25 @@ export const getUsers = (activePage,pageUserCount) => {
 }
 
 export const unfollow = (userId) => {
-    return (dispatch) => {
+    return async (dispatch) => {
         dispatch(toggleFollowingProgress(true, userId))
-        UserApi.setUnfollow(userId).then(response => {
+        let response = await UserApi.setUnfollow(userId)
             if (response.resultCode === 0) {
                 dispatch(unfollowSuccess(userId))
             }
             dispatch(toggleFollowingProgress(false,userId))
-        })
     }
 }
 
 export const follow = (userId) => {
-    return (dispatch) => {
+    return async (dispatch) => {
         dispatch(toggleFollowingProgress(true, userId))
-        UserApi.setFollow(userId).then(response => {
+        let response = await UserApi.setFollow(userId)
         if (response.resultCode === 0) {
             dispatch(followSuccess(userId))
         }
         dispatch(toggleFollowingProgress(false, userId))
-    })
-}
+    }
 }
 
 
