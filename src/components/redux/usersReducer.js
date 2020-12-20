@@ -43,7 +43,7 @@ const usersReducers =(state=initialState,action) => {
         case SET_USERS: {
             return { ...state, users:[ ...action.users]}}
         case SET_CURRENT_PAGE: {
-                return { ...state, activePage: action.activePage}}
+            return { ...state, activePage: action.activePage}}
         case TOTAL_USERS_COUNT: {
             return { ...state, totalUserCount: action.totalUserCount}}
 
@@ -92,11 +92,12 @@ export let toggleFollowingProgress = (followinginProgress, userId) => {
 
 export const getUsers = (activePage,pageUserCount) => {
     return (dispatch) =>{
+    dispatch(setCurrentPage(activePage))
     dispatch(toggleIsFetching(true))
     UserApi.getAllUsers(activePage,pageUserCount).then(response => {
-            dispatch(toggleIsFetching(false))
-            dispatch(setUsers(response.items))
-            dispatch(setTotalUsersCount(response.totalCount))
+        dispatch(toggleIsFetching(false))
+        dispatch(setUsers(response.items))
+        dispatch(setTotalUsersCount(response.totalCount))
         })
     }
 }
@@ -120,7 +121,7 @@ export const follow = (userId) => {
             dispatch(followSuccess(userId))
         }
         dispatch(toggleFollowingProgress(false, userId))
-    }
+}
 }
 
 

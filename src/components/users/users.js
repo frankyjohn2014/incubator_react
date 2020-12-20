@@ -1,21 +1,29 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styles from './users.module.css'
 import { NavLink } from 'react-router-dom';
 
 
 let Users = (props) => {
     let pagesCount = Math.ceil(props.totalUserCount / props.pageUserCount)
-        let pages = []
-        for (let i = 1; i<=pagesCount; i++) {
-            pages.push(i)
-        }
+    const pageFilter = 10
+    let pages = []
+    for (let i = 1; i<=pagesCount; i++) {
+        pages.push(i)
+    }
+
+    let [activePage, setActivePage] = useState(1)
+    let filterPageSize = Math.ceil(pagesCount/pageFilter)
+    let leftPages = (activePage - 1) * pageFilter + 1
+    let rightPages = activePage * pageFilter
     return (
-        <div> 
-            <div>
-                {pages.map(p => {
-                    return <span className={props.activePage === p && styles.activePage} onClick={(e) => {props.onPageChanged(p)}}>{p}</span>
-                })}
+        <div className={styles.paginator}>
+            {activePage > 1 && <button onClick={()=> {setActivePage(activePage-1)}}>Left</button>} 
+            <div className={styles}>
+                {pages.filter(p => p>=leftPages && p <= rightPages).map(p => {
+                    return <span className={props.activePage === p && styles.activePage} onClick={(e) => {props.onPageChanged(p)}}>{p}</span>})
+}
             </div>
+            {filterPageSize > activePage && <button onClick={()=> {setActivePage(activePage+1)}}>Right</button>}
         {
         props.users.users.map(u => <div key={u.id}>
             <span >
@@ -42,6 +50,7 @@ let Users = (props) => {
                 </span>
             </span>
         </div>)}
+
     </div>
     )
 }
