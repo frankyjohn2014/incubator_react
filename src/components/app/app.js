@@ -28,10 +28,10 @@ class App extends React.Component {
                     <Navbar/>
                     <Header/>
                     <div className="app-wrapper-content"> 
-                        <Route path="/dialogs" render={() => {return <React.Suspense fallback={<Spinner/>}><DialogsContainer/></React.Suspense>}}/>
+                        <Route path="/dialogs" render={() => <DialogsContainer/>}/>
                         <Route path="/profile/:userId?" render={() => {return<React.Suspense fallback={<Spinner/>}><ProfileContainer/></React.Suspense>}}/>
                         <Route path="/posts" render={() => <PostsContainer/>}/>
-                        <Route path="/users" render={() => <UsersContainer/>}/>
+                        <Route path="/users" render={() => {return <React.Suspense fallback={<Spinner/>}><UsersContainer/></React.Suspense>}}/>
                         <Route path="/login" render={() => <AuthContainer/>}/>
                     </div>
                 </BrowserRouter>

@@ -2,10 +2,12 @@ import { ProfileApi, UserApi } from "../api/api"
 
 const GET_PROFILE = 'GET_PROFILE'
 const SET_STATUS = 'SET_STATUS'
+const SAVE_FOTO = 'SAVE_FOTO'
 
 let initialState = {
     profile: null,
     status: "default status",
+    userId: 13180,
 }
 
 const profileReducer =(state=initialState,action) => {
@@ -18,6 +20,14 @@ const profileReducer =(state=initialState,action) => {
         case SET_STATUS: {
             return {
                 ...state, status: action.status
+            }
+        }
+        case SAVE_FOTO: {
+            return {
+                //error app
+                // ...state, profile: {...state.profile, photos: action.photos}, 
+                ...state, profile: action.profile, 
+
             }
         }
         default:
@@ -33,10 +43,13 @@ export let setStatus = (status) => {
     return {type:SET_STATUS, status}
 }
 
+export let saveSuccess = (file) => {
+    return {type:SAVE_FOTO, file}
+}
+
 export const getUserProfile = (UserId) => {
     return async dispatch => {
     let response = await UserApi.getProfile(UserId)
-    console.log(response)
     dispatch(setProfileData(response.data))
     }
 }
@@ -53,6 +66,15 @@ export const updateStatus = (status) => {
     let response = await ProfileApi.updateStatus(status)
     if (response.data.resultCode === 0) {
         dispatch(setStatus(status))
+    }
+    }
+}
+
+export const savePhoto = (file) => {
+    return async dispatch => {
+    let response = await ProfileApi.savePhotoApi(file)
+    if (response.data.resultCode === 0) {
+        dispatch(saveSuccess(response.data.data.photos))
     }
     }
 }

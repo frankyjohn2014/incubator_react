@@ -1,20 +1,35 @@
 import React from 'react'
 import Spinner from '../common/spinner/spinner'
-
+import avatar from '../../static/avatar.jpg'
 const ProfileInfo = (props) => {
     let state = {...props.profile}
     if (!props.profile) {
         return <Spinner/>
     }
+
+    let loadPhoto = (e) => {
+        if (e.target.files.length) {
+            props.savePhoto(e.target.files[0])
+        }
+    }
+
     return (
         <div>
             <div>
                 About Me : {state.aboutMe}
             </div>
+            <hr/>   
             <div>
                {state.fullName}
             </div>
-            <img src={props.profile.photos.large} alt=""/>
+            <hr/>
+            <img src={props.profile.photos.large || avatar} alt=""/>
+            <br/>
+            <hr/>
+            <div>
+                {props.isOwner &&  <input onChange={loadPhoto} type={"file"}/>}
+            </div>
+            <hr/>
             <div>
                 <p>
                 lookingForAJob : {state.lookingForAJobDescription}
