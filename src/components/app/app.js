@@ -23,19 +23,19 @@ class App extends React.Component {
             return <Spinner/>
         }
         return (
-                <div>
-                    
-                        <Navbar/>
-                        <Header/>
-                        <div className="app-wrapper-content"> 
-                            <Route path="/dialogs" render={() => {return <React.Suspense fallback={<Spinner/>}><DialogsContainer/></React.Suspense>}}/>
-                            <Route path="/profile/:userId?" render={() => {return<React.Suspense fallback={<Spinner/>}><ProfileContainer/></React.Suspense>}}/>
-                            <Route path="/posts" render={() => <PostsContainer/>}/>
-                            <Route path="/users" render={() => <UsersContainer/>}/>
-                            <Route path="/login" render={() => <AuthContainer/>}/>
-                        </div>
-
-                </div>
+            <div>
+                <BrowserRouter basename={process.env.PUBLIC_URL} >
+                    <Navbar/>
+                    <Header/>
+                    <div className="app-wrapper-content"> 
+                        <Route path="/dialogs" render={() => {return <React.Suspense fallback={<Spinner/>}><DialogsContainer/></React.Suspense>}}/>
+                        <Route path="/profile/:userId?" render={() => {return<React.Suspense fallback={<Spinner/>}><ProfileContainer/></React.Suspense>}}/>
+                        <Route path="/posts" render={() => <PostsContainer/>}/>
+                        <Route path="/users" render={() => <UsersContainer/>}/>
+                        <Route path="/login" render={() => <AuthContainer/>}/>
+                    </div>
+                </BrowserRouter>
+            </div>
         )
     }
 }

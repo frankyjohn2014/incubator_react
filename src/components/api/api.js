@@ -6,8 +6,6 @@ let instance = axios.create({
     headers: {'API-KEY':'7b14e426-fa0c-47bc-a6f8-9026a4b30723'}
 })
 
-
-
 export const UserApi = {
     getAllUsers(activePage,pageUserCount) {
         return instance.get(`/users?page=${activePage}&count=${pageUserCount}`).then(response => {
@@ -42,18 +40,15 @@ export const ProfileApi = {
 }
 
 export const AuthApi = {
-    me()  {
+    me() {
         return instance.get(`/auth/me`)
     },
-    login(email, password, rememberMe)  {
+    login(email, password, rememberMe) {
         return instance.post(`/auth/login`, {email, password, rememberMe})
     },
-    logout()  {
+    logout() {
         return instance.delete(`/auth/login`)
     },
-
-
-
 }
 
 
