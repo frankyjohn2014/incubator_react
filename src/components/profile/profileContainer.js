@@ -1,7 +1,7 @@
 import React from 'react'
 import Profile from './profile'
 import { connect } from 'react-redux'
-import {getUserProfile,getStatus, updateStatus, savePhoto} from '../profile/profileReducer'
+import {getUserProfile,getStatus, updateStatus, savePhoto, submitReducer} from '../profile/profileReducer'
 import { withRouter } from 'react-router-dom'
 import { withAuthRedirect } from '../hoc/AuthRedirect'
 import { compose } from 'redux'
@@ -31,7 +31,11 @@ class ProfileContainer extends React.Component {
             this.refreshPageUpdate()
         }
     }
-
+    onSubmit = (formData) => {
+        console.log(formData)
+        this.props.submitReducer(formData)
+        // props.loginReducer(formData.email, formData.password, formData.rememberMe)
+    }
     render() {
         return (
             <div>
@@ -42,7 +46,8 @@ class ProfileContainer extends React.Component {
                 login={this.props.login}
                 logoutReducer={this.props.logout}
                 isOwner={!this.props.match.params.userId}
-                savePhoto={this.props.savePhoto}/>
+                savePhoto={this.props.savePhoto}
+                onSubmit={this.onSubmit}/>
             </div>
         )
     }
@@ -58,7 +63,7 @@ let mapStateToProps = (state) => {
 }
 
 export default compose(
-    connect(mapStateToProps, {getUserProfile, getStatus, updateStatus, logout, savePhoto}),
+    connect(mapStateToProps, {getUserProfile, getStatus, updateStatus, logout, savePhoto, submitReducer}),
     withRouter,
     withAuthRedirect
 )(ProfileContainer)

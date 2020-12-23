@@ -1,5 +1,5 @@
 import { ProfileApi, UserApi } from "../api/api"
-
+import { stopSubmit } from "redux-form"
 const GET_PROFILE = 'GET_PROFILE'
 const SET_STATUS = 'SET_STATUS'
 const SAVE_FOTO = 'SAVE_FOTO'
@@ -85,5 +85,17 @@ export const savePhoto = (file) => {
     }
     }
 }
+export const submitReducer = (profile) => {
+    return async (dispatch) => {
+        let response = await UserApi.saveProfile(profile)
+            if (response.data.resultCode === 0) {
+                dispatch(getUserProfile(13180))
+            } else {
+                let ErrMessage = response.data.messages.length > 0 ?  response.data.messages[0] : "Some error"
+                dispatch(stopSubmit('profile',{_error: ErrMessage}))
+        }
+    }
+}
+
 
 export default profileReducer;

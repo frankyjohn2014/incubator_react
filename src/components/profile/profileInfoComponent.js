@@ -2,22 +2,23 @@ import React from 'react'
 
 
 const ProfileInfoComponent = (props) => {
+    console.log(props)
     return (
         <div>
-            <button onClick={() => {}}>Save</button>
+            <button onClick={props.editStatus}>Edit</button>
             <div>
-                About Me : {props.aboutMe}
+                About Me : {props.profile.aboutMe}
             </div>
             <div>
-               {props.fullName}
+               {props.profile.fullName}
             </div>
             <div>
                 <p>
-                lookingForAJob : {props.lookingForAJobDescription ? "yes" : "no"}
+                lookingForAJob : {props.profile.lookingForAJobDescription ? "yes" : "no"}
                 </p>
             </div>
             <div>
-                <b>My proffessional skill</b>: {props.lookingForAJobDescription}
+                <b>My proffessional skill</b>: {props.profile.lookingForAJobDescription}
             </div>
             <div>
                 <b>Contacts:</b> {props.contacts}

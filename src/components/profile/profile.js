@@ -7,7 +7,13 @@ const Profile = React.memo(props => {
     return (
         <div>
             <ProfileStatus status = {props.status} updateStatus={props.updateStatus} />
-            <ProfileInfo {...props} profile={props.profile.profile} login={props.login} logoutReducer={props.logoutReducer} isOwner={props.isOwner} savePhoto={props.savePhoto}/>
+            <ProfileInfo {...props} 
+            profile={props.profile.profile} 
+            login={props.login} 
+            logoutReducer={props.logoutReducer} 
+            isOwner={props.isOwner} 
+            savePhoto={props.savePhoto}
+            onSubmit={props.onSubmit}/>
         </div>
     )
 })
