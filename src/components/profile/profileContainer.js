@@ -10,6 +10,7 @@ import { logout } from '../auth/authReducer'
 class ProfileContainer extends React.Component {
     refreshPageUpdate () {
         let UserId = this.props.match.params.userId
+        console.log(UserId)
         if (!UserId) {
             UserId = this.props.authoriziedId.id
             //redirect to login
@@ -26,14 +27,12 @@ class ProfileContainer extends React.Component {
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
-        if (this.props != prevProps) {
+        if (this.props.match.params.userId != prevProps.match.params.userId) {
             this.refreshPageUpdate()
-               
         }
     }
 
     render() {
-        console.log('container',{...this.props})
         return (
             <div>
                 <Profile {...this.props} 
@@ -50,7 +49,6 @@ class ProfileContainer extends React.Component {
 }
 
 let mapStateToProps = (state) => {
-
     return {
         profile: state.profile,
         login: state.login,
@@ -58,7 +56,6 @@ let mapStateToProps = (state) => {
         authoriziedId: state.login
     }
 }
-
 
 export default compose(
     connect(mapStateToProps, {getUserProfile, getStatus, updateStatus, logout, savePhoto}),

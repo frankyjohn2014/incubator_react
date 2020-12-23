@@ -8,13 +8,15 @@ let initialState = {
     profile: null,
     status: "default status",
     userId: 13180,
+    lookingForAJobDescription: "React, Redux",
 }
 
 const profileReducer =(state=initialState,action) => {
     switch(action.type) {
         case GET_PROFILE: {
+            console.log(action.profile)
             return {
-                ...state, profile: action.profile
+                ...state, profile: action.profile,
             }
         }
         case SET_STATUS: {
@@ -27,7 +29,6 @@ const profileReducer =(state=initialState,action) => {
                 //error app
                 // ...state, profile: {...state.profile, photos: action.photos}, 
                 ...state, profile: action.profile, 
-
             }
         }
         default:
@@ -35,12 +36,16 @@ const profileReducer =(state=initialState,action) => {
     }
 } 
 
-export let setProfileData = (profile) => {
+export let getProfileData = (profile) => {
     return {type:GET_PROFILE, profile}
 }
 
 export let setStatus = (status) => {
     return {type:SET_STATUS, status}
+}
+
+export let setLookingForaJob = (status) => {
+    return {type:GET_PROFILE, status}
 }
 
 export let saveSuccess = (file) => {
@@ -50,14 +55,16 @@ export let saveSuccess = (file) => {
 export const getUserProfile = (UserId) => {
     return async dispatch => {
     let response = await UserApi.getProfile(UserId)
-    dispatch(setProfileData(response.data))
+    dispatch(getProfileData(response.data))
     }
 }
 
 export const getStatus = (UserId) => {
     return async dispatch => {
     let response = await ProfileApi.getStatus(UserId)
+    // let responseLooking = await ProfileApi.setLookingForaJob(UserId)
     dispatch(setStatus(response.data))
+    // dispatch(setLookingForaJob(responseLooking.data))
     }
 }
 
