@@ -86,10 +86,12 @@ export const savePhoto = (file) => {
     }
 }
 export const submitReducer = (profile) => {
-    return async (dispatch) => {
+    return async (dispatch, getState) => {
+        const UserId = getState().login.id;
         let response = await UserApi.saveProfile(profile)
             if (response.data.resultCode === 0) {
-                dispatch(getUserProfile(13180))
+                dispatch(getUserProfile(UserId))
+                // dispatch(getUserProfile(13180))
             } else {
                 let ErrMessage = response.data.messages.length > 0 ?  response.data.messages[0] : "Some error"
                 dispatch(stopSubmit('profile',{_error: ErrMessage}))

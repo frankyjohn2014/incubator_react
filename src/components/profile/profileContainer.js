@@ -8,9 +8,10 @@ import { compose } from 'redux'
 import { logout } from '../auth/authReducer'
 
 class ProfileContainer extends React.Component {
+    
     refreshPageUpdate () {
+       
         let UserId = this.props.match.params.userId
-        console.log(UserId)
         if (!UserId) {
             UserId = this.props.authoriziedId.id
             //redirect to login
@@ -23,6 +24,7 @@ class ProfileContainer extends React.Component {
     }
 
     componentDidMount() {
+        
         this.refreshPageUpdate()
     }
 
@@ -31,12 +33,10 @@ class ProfileContainer extends React.Component {
             this.refreshPageUpdate()
         }
     }
-    onSubmit = (formData) => {
-        console.log(formData)
-        this.props.submitReducer(formData)
-        // props.loginReducer(formData.email, formData.password, formData.rememberMe)
-    }
+
+    
     render() {
+       
         return (
             <div>
                 <Profile {...this.props} 
@@ -47,7 +47,9 @@ class ProfileContainer extends React.Component {
                 logoutReducer={this.props.logout}
                 isOwner={!this.props.match.params.userId}
                 savePhoto={this.props.savePhoto}
-                onSubmit={this.onSubmit}/>
+                value={this.value}
+                submitReducer={this.props.submitReducer}
+                />
             </div>
         )
     }

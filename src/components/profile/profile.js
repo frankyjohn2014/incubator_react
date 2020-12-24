@@ -13,7 +13,8 @@ const Profile = React.memo(props => {
             logoutReducer={props.logoutReducer} 
             isOwner={props.isOwner} 
             savePhoto={props.savePhoto}
-            onSubmit={props.onSubmit}/>
+            value={props.value}
+            submitReducer={props.submitReducer}/>
         </div>
     )
 })

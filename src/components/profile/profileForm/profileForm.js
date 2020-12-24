@@ -7,7 +7,7 @@ const EditProfile = (props) => {
 
     return (
         <div>
-            <ProfileReduxForm onSubmit={props.onSubmit} forms={props.forms} saveForm={props.saveForm}/>
+            <ProfileReduxForm editModeValue={props.editModeValue} initialValues={props.initialValues} onSubmit={props.onSubmit} forms={props.forms} saveForm={props.saveForm}/>
             {/* <ProfileReduxForm onSubmit={onSubmit} forms={props.forms}/> */}
         </div>
     )
