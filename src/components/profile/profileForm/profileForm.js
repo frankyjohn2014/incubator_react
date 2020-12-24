@@ -4,23 +4,23 @@ import { Input } from '../../common/FormsControls/FormsControls'
 import { Field,reduxForm } from 'redux-form'
 
 const EditProfile = (props) => {
-
     return (
         <div>
-            <ProfileReduxForm editModeValue={props.editModeValue} initialValues={props.initialValues} onSubmit={props.onSubmit} forms={props.forms} saveForm={props.saveForm}/>
+            <ProfileReduxForm contacts={props.contacts}editModeValue={props.editModeValue} initialValues={props.initialValues} onSubmit={props.onSubmit} forms={props.forms} saveForm={props.saveForm}/>
             {/* <ProfileReduxForm onSubmit={onSubmit} forms={props.forms}/> */}
         </div>
     )
 }
 
-
-
 const ProfileForm = (props) => {
+  
     return (
         <div>
-           
             <form onSubmit={props.handleSubmit}>
                 <button>Save</button>
+                <div>
+                    <b>{props.error}</b>
+                </div>
                 <div>
                     About Me:
                 </div>
@@ -49,12 +49,17 @@ const ProfileForm = (props) => {
                     <b>Contacts:</b>
                 </div>
                 <div>
+                    {props.contacts.map((e) => 
+                        <Field key={e.key} placeholder={(e.key)} name={"contacts."+(e.key)} component ={Input}/>
+                    )}
+                    
                 </div>
+
                 <hr/>
             </form>
         </div>
     )
 }
-const ProfileReduxForm = reduxForm({form: 'profile'})(ProfileForm)
+const ProfileReduxForm = reduxForm({form: 'edit-profile'})(ProfileForm)
 
 export default EditProfile

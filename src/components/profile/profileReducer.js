@@ -93,8 +93,9 @@ export const submitReducer = (profile) => {
                 dispatch(getUserProfile(UserId))
                 // dispatch(getUserProfile(13180))
             } else {
+                console.log(response.data.messages[0])
                 let ErrMessage = response.data.messages.length > 0 ?  response.data.messages[0] : "Some error"
-                dispatch(stopSubmit('profile',{_error: ErrMessage}))
+                dispatch(stopSubmit('edit-profile',{_error: response.data.messages[0]}))
         }
     }
 }

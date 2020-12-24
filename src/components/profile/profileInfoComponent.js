@@ -2,7 +2,6 @@ import React from 'react'
 
 
 const ProfileInfoComponent = (props) => {
-    console.log(props)
     return (
         <div>
             <button onClick={props.editStatus}>Edit</button>
