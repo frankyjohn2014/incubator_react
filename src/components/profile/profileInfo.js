@@ -12,9 +12,8 @@ const ProfileInfo = (props) => {
     }
 
     let onSubmit = (formData) => {
-        console.log(formData)
         props.submitReducer(formData)
-        setMode(true)
+        // setMode(true)
     }
 
     if (!props.profile) {
@@ -35,7 +34,7 @@ const ProfileInfo = (props) => {
             </div>
             <hr/>
             {editMode && <ProfileInfoComponent profile={props.profile} contacts={contacts} editStatus={editStatus}/>}
-            {!editMode && <EditProfile  initialValues={props.profile} onSubmit={onSubmit} contacts={contacts} />}
+            {!editMode && <EditProfile  initialValues={props.profile} onSubmit={onSubmit} contacts={contacts} forms={props.forms} />}
         </div>
     )
 }

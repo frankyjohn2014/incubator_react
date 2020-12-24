@@ -49,6 +49,7 @@ class ProfileContainer extends React.Component {
                 savePhoto={this.props.savePhoto}
                 value={this.value}
                 submitReducer={this.props.submitReducer}
+                forms={this.props.forms}
                 />
             </div>
         )
@@ -60,7 +61,8 @@ let mapStateToProps = (state) => {
         profile: state.profile,
         login: state.login,
         status: state.profile.status,
-        authoriziedId: state.login
+        authoriziedId: state.login,
+        forms: state.form.edit_profile
     }
 }
 

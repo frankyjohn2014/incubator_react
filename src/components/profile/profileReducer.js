@@ -14,7 +14,6 @@ let initialState = {
 const profileReducer =(state=initialState,action) => {
     switch(action.type) {
         case GET_PROFILE: {
-            console.log(action.profile)
             return {
                 ...state, profile: action.profile,
             }
@@ -93,9 +92,8 @@ export const submitReducer = (profile) => {
                 dispatch(getUserProfile(UserId))
                 // dispatch(getUserProfile(13180))
             } else {
-                console.log(response.data.messages[0])
                 let ErrMessage = response.data.messages.length > 0 ?  response.data.messages[0] : "Some error"
-                dispatch(stopSubmit('edit-profile',{_error: response.data.messages[0]}))
+                dispatch(stopSubmit('edit_profile',{_error: ErrMessage}))
         }
     }
 }

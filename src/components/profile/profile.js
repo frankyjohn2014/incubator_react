@@ -4,6 +4,7 @@ import ProfileStatus from './hookprofileStatus'
 
 
 const Profile = React.memo(props => {
+    console.log(props)
     return (
         <div>
             <ProfileStatus status = {props.status} updateStatus={props.updateStatus} />
@@ -14,7 +15,8 @@ const Profile = React.memo(props => {
             isOwner={props.isOwner} 
             savePhoto={props.savePhoto}
             value={props.value}
-            submitReducer={props.submitReducer}/>
+            submitReducer={props.submitReducer}
+            forms={props.forms}/>
         </div>
     )
 })
