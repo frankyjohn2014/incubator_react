@@ -4,7 +4,6 @@ import ProfileStatus from './hookprofileStatus'
 
 
 const Profile = React.memo(props => {
-    console.log(props)
     return (
         <div>
             <ProfileStatus status = {props.status} updateStatus={props.updateStatus} />

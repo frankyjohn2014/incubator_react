@@ -94,6 +94,7 @@ export const submitReducer = (profile) => {
             } else {
                 let ErrMessage = response.data.messages.length > 0 ?  response.data.messages[0] : "Some error"
                 dispatch(stopSubmit('edit_profile',{_error: ErrMessage}))
+                return Promise.reject(response.data.messages[0])
         }
     }
 }

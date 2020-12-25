@@ -12,8 +12,11 @@ const ProfileInfo = (props) => {
     }
 
     let onSubmit = (formData) => {
-        props.submitReducer(formData)
-        // setMode(true)
+        props.submitReducer(formData).then(
+            () => {
+                setMode(true)
+            }
+        )
     }
 
     if (!props.profile) {
