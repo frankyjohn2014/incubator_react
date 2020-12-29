@@ -2,11 +2,15 @@ import { getAuthData } from "../auth/authReducer"
 
 const INIT_APP = 'INIT_APP'
 
-let initialState = {
+type initialStateType = {
+    initialize: boolean,
+}
+
+let initialState:initialStateType = {
     initialize: false,
 }
 
-const appReducers =(state=initialState,action) => {
+const appReducers =(state=initialState,action:any): initialStateType => {
     switch(action.type) {
         case INIT_APP: {
             return {
@@ -18,13 +22,18 @@ const appReducers =(state=initialState,action) => {
     }
 } 
 
-export let initializeActionCreator = () => {
+
+type initializeActionCreatorType = {
+    type: typeof INIT_APP
+}
+
+export let initializeActionCreator = ():initializeActionCreatorType => {
     return {type:INIT_APP}
 }
 
 
 export const initializeThunk = () => {
-    return (dispatch) => {
+    return (dispatch:any) => {
         let promise = dispatch(getAuthData())
         Promise.all([promise]).then(() => {
             dispatch(initializeActionCreator())
