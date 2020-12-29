@@ -3,23 +3,17 @@ import { AuthApi ,SecurityApi} from "../api/api"
 const GET_AUTH = 'GET_AUTH'
 const GET_CAPTCHA_SUCCESS = 'GET_CAPTCHA_SUCCESS'
 
-type initialStateType = {
-    id: null | number,
-    email: null | string,
-    login: null | string,
-    isAuth: boolean,
-    captchaUrl: null | string,
+let initialState = {
+    id: null as null | number,
+    email: null as null | string,
+    login: null as null | string,
+    isAuth: false as boolean,
+    captchaUrl: null as null | string,
 }
 
-let initialState:initialStateType = {
-    id: null,
-    email: null,
-    login: null,
-    isAuth: false,
-    captchaUrl: null,
-}
+type initialStateType = typeof initialState
 
-const authReducer =(state=initialState, action:any) => {
+const authReducer =(state=initialState, action:any): initialStateType => {
     switch(action.type) {
         case GET_AUTH: 
         case GET_CAPTCHA_SUCCESS: 

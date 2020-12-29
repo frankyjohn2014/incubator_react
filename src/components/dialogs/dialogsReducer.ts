@@ -1,18 +1,27 @@
 const ADD_POST_DIALOG = 'ADD-POST-DIALOG'
+
+type DialogType = {
+    id:number, name: string
+}
+type MessageType = {
+    id:number, message: string
+}
 let initialState = {
     user: [
-        {id:1, name:"Andrey", key:1},
-        {id:2, name:"Dima", key:2},
-        {id:3, name:"Enot", key:3},
-    ],
+        {id:1, name:"Andrey" },
+        {id:2, name:"Dima" },
+        {id:3, name:"Enot" },
+    ] as Array<DialogType>,
     message: [
         {id:1, message:"Hello!"},
         {id:2, message:"Hi"},
         {id:3, message:"How are yoy?"},
-    ]
+    ] as Array<MessageType>
 }
 
-const dialogReducer = (state=initialState,action) => {
+type initialStateType = typeof initialState
+
+const dialogReducer = (state=initialState,action:any):initialStateType => {
     let newUser = {
         id: 5,
         name: "Enot",
@@ -31,7 +40,12 @@ const dialogReducer = (state=initialState,action) => {
     }
 }
 
-export let addPostActionCreatorDialog = (newMessageBody) => {
+type addPostActionCreatorDialogType = {
+    type: typeof ADD_POST_DIALOG,
+    newMessageBody : string
+}
+
+export let addPostActionCreatorDialog = (newMessageBody: string):addPostActionCreatorDialogType => {
     return { type : ADD_POST_DIALOG, newMessageBody}
 }
 export default dialogReducer;

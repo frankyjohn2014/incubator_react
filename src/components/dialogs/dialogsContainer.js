@@ -1,7 +1,7 @@
 import React from 'react'
 import classes from './dialogs.module.css'
 import Dialogs from '../dialogs/dialogs';
-import {addPostActionCreatorDialog} from '../redux/dialogsReducer'
+import {addPostActionCreatorDialog} from './dialogsReducer'
 import { connect } from 'react-redux';
 import { withAuthRedirect } from '../hoc/AuthRedirect';
 import { compose } from 'redux';

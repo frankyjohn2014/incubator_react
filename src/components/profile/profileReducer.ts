@@ -4,14 +4,42 @@ const GET_PROFILE = 'GET_PROFILE'
 const SET_STATUS = 'SET_STATUS'
 const SAVE_FOTO = 'SAVE_FOTO'
 
+type ContactsType = {
+    github: string,
+    vk:string,
+    facebook: string,
+    instagram:string,
+    twitter:string,
+    website: string,
+    youtube: string,
+    mainLink: string,
+}
+
+type PhotosType = {
+    small: string | null,
+    large: string | null
+}
+
+type ProfileType = {
+    userId: Number,
+    lookingForAJob: boolean,
+    lookingForAJobDescription: string,
+    fullName: string,
+    contacts: ContactsType,
+    photos: PhotosType
+}
+
+
 let initialState = {
-    profile: null,
+    profile: null as null | ProfileType,
     status: "default status",
     userId: 13180,
     lookingForAJobDescription: "React, Redux",
 }
 
-const profileReducer =(state=initialState,action) => {
+type initialStateType = typeof initialState
+
+const profileReducer =(state=initialState,action:any):initialStateType => {
     switch(action.type) {
         case GET_PROFILE: {
             return {
@@ -27,7 +55,7 @@ const profileReducer =(state=initialState,action) => {
             return {
                 //error app
                 // ...state, profile: {...state.profile, photos: action.photos}, 
-                ...state, profile: action.profile, 
+                ...state, profile: action.profile,
             }
         }
         default:
@@ -35,31 +63,52 @@ const profileReducer =(state=initialState,action) => {
     }
 } 
 
-export let getProfileData = (profile) => {
+type getProfileDataType = {
+    type: typeof GET_PROFILE,
+    profile : ProfileType
+}
+
+export let getProfileData = (profile:ProfileType):getProfileDataType => {
     return {type:GET_PROFILE, profile}
 }
 
-export let setStatus = (status) => {
+type setStatusType = {
+    type : typeof SET_STATUS,
+    status : string,
+}
+
+export let setStatus = (status:string):setStatusType => {
     return {type:SET_STATUS, status}
 }
 
-export let setLookingForaJob = (status) => {
+type setLookingForaJobType = {
+    type: typeof GET_PROFILE,
+    status: string,
+}
+
+export let setLookingForaJob = (status:string):setLookingForaJobType => {
     return {type:GET_PROFILE, status}
 }
 
-export let saveSuccess = (file) => {
-    return {type:SAVE_FOTO, file}
+type saveSuccessType = {
+    type: typeof SAVE_FOTO,
+    file: PhotosType
 }
 
-export const getUserProfile = (UserId) => {
-    return async dispatch => {
+export let saveSuccess = (file:PhotosType):saveSuccessType => {
+    return {type:SAVE_FOTO, file}
+}
+////////////////// THUNK
+
+export const getUserProfile = (UserId:number) => {
+    return async (dispatch:any) => {
     let response = await UserApi.getProfile(UserId)
     dispatch(getProfileData(response.data))
     }
 }
 
-export const getStatus = (UserId) => {
-    return async dispatch => {
+export const getStatus = (UserId:number) => {
+    return async (dispatch:any) => {
     let response = await ProfileApi.getStatus(UserId)
     // let responseLooking = await ProfileApi.setLookingForaJob(UserId)
     dispatch(setStatus(response.data))
@@ -67,8 +116,8 @@ export const getStatus = (UserId) => {
     }
 }
 
-export const updateStatus = (status) => {
-    return async dispatch => {
+export const updateStatus = (status:string) => {
+    return async (dispatch:any) => {
     let response = await ProfileApi.updateStatus(status)
     if (response.data.resultCode === 0) {
         dispatch(setStatus(status))
@@ -76,16 +125,16 @@ export const updateStatus = (status) => {
     }
 }
 
-export const savePhoto = (file) => {
-    return async dispatch => {
+export const savePhoto = (file:any) => {
+    return async (dispatch:any) => {
     let response = await ProfileApi.savePhotoApi(file)
     if (response.data.resultCode === 0) {
         dispatch(saveSuccess(response.data.data.photos))
     }
     }
 }
-export const submitReducer = (profile) => {
-    return async (dispatch, getState) => {
+export const submitReducer = (profile:ProfileType) => {
+    return async (dispatch:any, getState:any) => {
         const UserId = getState().login.id;
         let response = await UserApi.saveProfile(profile)
             if (response.data.resultCode === 0) {

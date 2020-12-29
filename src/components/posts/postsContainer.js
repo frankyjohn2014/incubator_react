@@ -1,7 +1,7 @@
 import React from 'react';
 import classes from './posts.module.css'
 import Posts from './posts'
-import  {updatePostActionCreator, addPostActionCreator} from '../redux/postsReducer'
+import  {updatePostActionCreator, addPostActionCreator} from './postsReducer'
 import { connect } from 'react-redux';
 import { withAuthRedirect } from '../hoc/AuthRedirect';
 import { compose } from 'redux';

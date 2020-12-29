@@ -1,7 +1,7 @@
 import React from 'react';
 import Users from './users'
 import { connect } from 'react-redux';
-import {follow,unfollow,setCurrentPage,getUsers} from '../redux/usersReducer';
+import {follow,unfollow,setCurrentPage,getUsers} from './usersReducer';
 import Spinner from '../common/spinner/spinner';
 import { compose } from 'redux';
 import { withAuthRedirect } from '../hoc/AuthRedirect';
