@@ -1,7 +1,7 @@
-.userPhoto {
-    width: 100px;
-    height: 150px;
+.paginator {
+    margin: 10px;
 }
+
 
 .activePage {
     color: red;

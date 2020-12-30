@@ -7,11 +7,14 @@ const TOTAL_USERS_COUNT = 'TOTAL_USERS_COUNT'
 const TOGGLE_IS_FETCHING = 'TOGGLE_IS_FETCHING'
 const TOGGLE_FOLLOWING_PROGRESS = 'TOGGLE_FOLLOWING_PROGRESS'
 
-type UsersType = {
+export type UsersType = {
     id: number,
     name: string,
     status: string,
-    photos: object,
+    photos: {
+        small:string,
+        larger: string
+    },
     small: string,
     large: string,
     followed: boolean,
@@ -35,13 +38,10 @@ const usersReducers =(state=initialState,action:any):initialStateType => {
                 ...state, 
                 users: state.users.map(u => {
                     if (u.id === action.userId) {
-                        return {...u, followed: true}
-
-                    }
+                        return {...u, followed: true}}
                     return u
                 })}
             }
-
         case UNFOLLOW: {
             return {
                 ...state, 
@@ -58,22 +58,18 @@ const usersReducers =(state=initialState,action:any):initialStateType => {
             return { ...state, activePage: action.activePage}}
         case TOTAL_USERS_COUNT: {
             return { ...state, totalUserCount: action.totalUserCount}}
-
         case TOGGLE_IS_FETCHING: {
             return { ...state, isFetching: action.isFetching}}
-        
         case TOGGLE_FOLLOWING_PROGRESS: {
             return { ...state, 
                 followinginProgress: action.followinginProgress
                 ? [...state.followinginProgress, action.userId]
                 : state.followinginProgress.filter(id => id !== action.userId)
-            }
-        }
+            }}
         default:
             return state
     }
-} 
-
+}
 
 type followSuccessType = {
     type: typeof FOLLOW,
